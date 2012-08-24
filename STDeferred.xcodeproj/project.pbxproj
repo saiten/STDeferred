@@ -1,0 +1,242 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7F578B0115E7BE770053ACA6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F578B0015E7BE770053ACA6 /* Foundation.framework */; };
+		7F578B0615E7BE770053ACA6 /* STDeferred.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7F578B0515E7BE770053ACA6 /* STDeferred.h */; };
+		7F578B0815E7BE770053ACA6 /* STDeferred.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F578B0715E7BE770053ACA6 /* STDeferred.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7F578AFB15E7BE770053ACA6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+				7F578B0615E7BE770053ACA6 /* STDeferred.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		7F578AFD15E7BE770053ACA6 /* libSTDeferred.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSTDeferred.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F578B0015E7BE770053ACA6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7F578B0415E7BE770053ACA6 /* STDeferred-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "STDeferred-Prefix.pch"; sourceTree = "<group>"; };
+		7F578B0515E7BE770053ACA6 /* STDeferred.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STDeferred.h; sourceTree = "<group>"; };
+		7F578B0715E7BE770053ACA6 /* STDeferred.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STDeferred.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7F578AFA15E7BE770053ACA6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F578B0115E7BE770053ACA6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7F578AF215E7BE770053ACA6 = {
+			isa = PBXGroup;
+			children = (
+				7F578B0215E7BE770053ACA6 /* STDeferred */,
+				7F578AFF15E7BE770053ACA6 /* Frameworks */,
+				7F578AFE15E7BE770053ACA6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7F578AFE15E7BE770053ACA6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7F578AFD15E7BE770053ACA6 /* libSTDeferred.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7F578AFF15E7BE770053ACA6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7F578B0015E7BE770053ACA6 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7F578B0215E7BE770053ACA6 /* STDeferred */ = {
+			isa = PBXGroup;
+			children = (
+				7F578B0515E7BE770053ACA6 /* STDeferred.h */,
+				7F578B0715E7BE770053ACA6 /* STDeferred.m */,
+				7F578B0315E7BE770053ACA6 /* Supporting Files */,
+			);
+			path = STDeferred;
+			sourceTree = "<group>";
+		};
+		7F578B0315E7BE770053ACA6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7F578B0415E7BE770053ACA6 /* STDeferred-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7F578AFC15E7BE770053ACA6 /* STDeferred */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F578B0B15E7BE770053ACA6 /* Build configuration list for PBXNativeTarget "STDeferred" */;
+			buildPhases = (
+				7F578AF915E7BE770053ACA6 /* Sources */,
+				7F578AFA15E7BE770053ACA6 /* Frameworks */,
+				7F578AFB15E7BE770053ACA6 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = STDeferred;
+			productName = STDeferred;
+			productReference = 7F578AFD15E7BE770053ACA6 /* libSTDeferred.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7F578AF415E7BE770053ACA6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = saiten;
+			};
+			buildConfigurationList = 7F578AF715E7BE770053ACA6 /* Build configuration list for PBXProject "STDeferred" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7F578AF215E7BE770053ACA6;
+			productRefGroup = 7F578AFE15E7BE770053ACA6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7F578AFC15E7BE770053ACA6 /* STDeferred */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7F578AF915E7BE770053ACA6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F578B0815E7BE770053ACA6 /* STDeferred.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		7F578B0915E7BE770053ACA6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		7F578B0A15E7BE770053ACA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7F578B0C15E7BE770053ACA6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/STDeferred.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "STDeferred/STDeferred-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		7F578B0D15E7BE770053ACA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/STDeferred.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "STDeferred/STDeferred-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7F578AF715E7BE770053ACA6 /* Build configuration list for PBXProject "STDeferred" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F578B0915E7BE770053ACA6 /* Debug */,
+				7F578B0A15E7BE770053ACA6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F578B0B15E7BE770053ACA6 /* Build configuration list for PBXNativeTarget "STDeferred" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F578B0C15E7BE770053ACA6 /* Debug */,
+				7F578B0D15E7BE770053ACA6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7F578AF415E7BE770053ACA6 /* Project object */;
+}
