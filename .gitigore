@@ -13,8 +13,6 @@ build/*
 xcuserdata
 profile
 *.moved-aside
-
 docset-installed.txt
 .DS_Store
-
 Podfile.lock

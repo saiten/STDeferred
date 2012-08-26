@@ -7,38 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7F578B0115E7BE770053ACA6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F578B0015E7BE770053ACA6 /* Foundation.framework */; };
-		7F578B0615E7BE770053ACA6 /* STDeferred.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7F578B0515E7BE770053ACA6 /* STDeferred.h */; };
-		7F578B0815E7BE770053ACA6 /* STDeferred.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F578B0715E7BE770053ACA6 /* STDeferred.m */; };
+		7F578B4815E7E8D60053ACA6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F578B4715E7E8D60053ACA6 /* UIKit.framework */; };
+		7F578B4915E7E8D60053ACA6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F578B0015E7BE770053ACA6 /* Foundation.framework */; };
+		7F578B4B15E7E8D60053ACA6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F578B4A15E7E8D60053ACA6 /* CoreGraphics.framework */; };
+		7F578B5115E7E8D60053ACA6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7F578B4F15E7E8D60053ACA6 /* InfoPlist.strings */; };
+		7F578B5315E7E8D60053ACA6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F578B5215E7E8D60053ACA6 /* main.m */; };
+		7F578B5E15E7E8F30053ACA6 /* libPods-test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F578B5D15E7E8F30053ACA6 /* libPods-test.a */; };
+		7F578B6115E7E9440053ACA6 /* STDeferredTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F578B6015E7E9440053ACA6 /* STDeferredTest.m */; };
+		7F578B6215E7E9760053ACA6 /* STDeferred.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F578B0715E7BE770053ACA6 /* STDeferred.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		7F578AFB15E7BE770053ACA6 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/${PRODUCT_NAME}";
-			dstSubfolderSpec = 16;
-			files = (
-				7F578B0615E7BE770053ACA6 /* STDeferred.h in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		7F578AFD15E7BE770053ACA6 /* libSTDeferred.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSTDeferred.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F578B0015E7BE770053ACA6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7F578B0015E7BE770053ACA6 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7F578B0415E7BE770053ACA6 /* STDeferred-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "STDeferred-Prefix.pch"; sourceTree = "<group>"; };
 		7F578B0515E7BE770053ACA6 /* STDeferred.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STDeferred.h; sourceTree = "<group>"; };
 		7F578B0715E7BE770053ACA6 /* STDeferred.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STDeferred.m; sourceTree = "<group>"; };
+		7F578B4515E7E8D60053ACA6 /* STDeferredTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STDeferredTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F578B4715E7E8D60053ACA6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7F578B4A15E7E8D60053ACA6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7F578B4E15E7E8D60053ACA6 /* STDeferredTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "STDeferredTest-Info.plist"; sourceTree = "<group>"; };
+		7F578B5015E7E8D60053ACA6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7F578B5215E7E8D60053ACA6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7F578B5415E7E8D60053ACA6 /* STDeferredTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "STDeferredTest-Prefix.pch"; sourceTree = "<group>"; };
+		7F578B5D15E7E8F30053ACA6 /* libPods-test.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-test.a"; path = "Pods/build/Release-iphoneos/libPods-test.a"; sourceTree = "<group>"; };
+		7F578B6015E7E9440053ACA6 /* STDeferredTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDeferredTest.m; sourceTree = "<group>"; };
+		8E6C446EB5C643D6B9D614F5 /* Pods-test.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test.xcconfig"; path = "Pods/Pods-test.xcconfig"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7F578AFA15E7BE770053ACA6 /* Frameworks */ = {
+		7F578B4215E7E8D60053ACA6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F578B0115E7BE770053ACA6 /* Foundation.framework in Frameworks */,
+				7F578B5E15E7E8F30053ACA6 /* libPods-test.a in Frameworks */,
+				7F578B4815E7E8D60053ACA6 /* UIKit.framework in Frameworks */,
+				7F578B4915E7E8D60053ACA6 /* Foundation.framework in Frameworks */,
+				7F578B4B15E7E8D60053ACA6 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,15 +53,17 @@
 			isa = PBXGroup;
 			children = (
 				7F578B0215E7BE770053ACA6 /* STDeferred */,
+				7F578B4C15E7E8D60053ACA6 /* STDeferredTest */,
 				7F578AFF15E7BE770053ACA6 /* Frameworks */,
 				7F578AFE15E7BE770053ACA6 /* Products */,
+				8E6C446EB5C643D6B9D614F5 /* Pods-test.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
 		7F578AFE15E7BE770053ACA6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7F578AFD15E7BE770053ACA6 /* libSTDeferred.a */,
+				7F578B4515E7E8D60053ACA6 /* STDeferredTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -65,7 +71,10 @@
 		7F578AFF15E7BE770053ACA6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F578B5D15E7E8F30053ACA6 /* libPods-test.a */,
 				7F578B0015E7BE770053ACA6 /* Foundation.framework */,
+				7F578B4715E7E8D60053ACA6 /* UIKit.framework */,
+				7F578B4A15E7E8D60053ACA6 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -88,25 +97,45 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		7F578B4C15E7E8D60053ACA6 /* STDeferredTest */ = {
+			isa = PBXGroup;
+			children = (
+				7F578B6015E7E9440053ACA6 /* STDeferredTest.m */,
+				7F578B4D15E7E8D60053ACA6 /* Supporting Files */,
+			);
+			path = STDeferredTest;
+			sourceTree = "<group>";
+		};
+		7F578B4D15E7E8D60053ACA6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7F578B4E15E7E8D60053ACA6 /* STDeferredTest-Info.plist */,
+				7F578B4F15E7E8D60053ACA6 /* InfoPlist.strings */,
+				7F578B5215E7E8D60053ACA6 /* main.m */,
+				7F578B5415E7E8D60053ACA6 /* STDeferredTest-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7F578AFC15E7BE770053ACA6 /* STDeferred */ = {
+		7F578B4415E7E8D60053ACA6 /* STDeferredTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7F578B0B15E7BE770053ACA6 /* Build configuration list for PBXNativeTarget "STDeferred" */;
+			buildConfigurationList = 7F578B5815E7E8D60053ACA6 /* Build configuration list for PBXNativeTarget "STDeferredTest" */;
 			buildPhases = (
-				7F578AF915E7BE770053ACA6 /* Sources */,
-				7F578AFA15E7BE770053ACA6 /* Frameworks */,
-				7F578AFB15E7BE770053ACA6 /* CopyFiles */,
+				7F578B4115E7E8D60053ACA6 /* Sources */,
+				7F578B4215E7E8D60053ACA6 /* Frameworks */,
+				7F578B4315E7E8D60053ACA6 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = STDeferred;
-			productName = STDeferred;
-			productReference = 7F578AFD15E7BE770053ACA6 /* libSTDeferred.a */;
-			productType = "com.apple.product-type.library.static";
+			name = STDeferredTest;
+			productName = STDeferredTest;
+			productReference = 7F578B4515E7E8D60053ACA6 /* STDeferredTest.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -129,21 +158,45 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7F578AFC15E7BE770053ACA6 /* STDeferred */,
+				7F578B4415E7E8D60053ACA6 /* STDeferredTest */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		7F578B4315E7E8D60053ACA6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F578B5115E7E8D60053ACA6 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		7F578AF915E7BE770053ACA6 /* Sources */ = {
+		7F578B4115E7E8D60053ACA6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F578B0815E7BE770053ACA6 /* STDeferred.m in Sources */,
+				7F578B5315E7E8D60053ACA6 /* main.m in Sources */,
+				7F578B6215E7E9760053ACA6 /* STDeferred.m in Sources */,
+				7F578B6115E7E9440053ACA6 /* STDeferredTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7F578B4F15E7E8D60053ACA6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7F578B5015E7E8D60053ACA6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		7F578B0915E7BE770053ACA6 /* Debug */ = {
@@ -192,27 +245,32 @@
 			};
 			name = Release;
 		};
-		7F578B0C15E7BE770053ACA6 /* Debug */ = {
+		7F578B5915E7E8D60053ACA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E6C446EB5C643D6B9D614F5 /* Pods-test.xcconfig */;
 			buildSettings = {
-				DSTROOT = /tmp/STDeferred.dst;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "STDeferred/STDeferred-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
+				GCC_PREFIX_HEADER = "STDeferredTest/STDeferredTest-Prefix.pch";
+				INFOPLIST_FILE = "STDeferredTest/STDeferredTest-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
-		7F578B0D15E7BE770053ACA6 /* Release */ = {
+		7F578B5A15E7E8D60053ACA6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E6C446EB5C643D6B9D614F5 /* Pods-test.xcconfig */;
 			buildSettings = {
-				DSTROOT = /tmp/STDeferred.dst;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "STDeferred/STDeferred-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
+				GCC_PREFIX_HEADER = "STDeferredTest/STDeferredTest-Prefix.pch";
+				INFOPLIST_FILE = "STDeferredTest/STDeferredTest-Info.plist";
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -228,13 +286,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7F578B0B15E7BE770053ACA6 /* Build configuration list for PBXNativeTarget "STDeferred" */ = {
+		7F578B5815E7E8D60053ACA6 /* Build configuration list for PBXNativeTarget "STDeferredTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7F578B0C15E7BE770053ACA6 /* Debug */,
-				7F578B0D15E7BE770053ACA6 /* Release */,
+				7F578B5915E7E8D60053ACA6 /* Debug */,
+				7F578B5A15E7E8D60053ACA6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
