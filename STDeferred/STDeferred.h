@@ -33,6 +33,7 @@ typedef id (^STDeferredNextCallback)(id resultObject);
 - (STDeferred*)then:(STDeferredCallback)block;
 - (STDeferred*)fail:(STDeferredCallback)block;
 - (STDeferred*)pipe:(STDeferredNextCallback)block;
+- (STDeferred*)pipe:(STDeferredNextCallback)successBlock fail:(STDeferredNextCallback)failBlock;
 + (STDeferred*)whenWithArray:(NSArray*)deferreds;
 + (STDeferred*)when:deferred, ... NS_REQUIRES_NIL_TERMINATION;
 + (STDeferred*)timeout:(NSTimeInterval)interval;

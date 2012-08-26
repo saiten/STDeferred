@@ -136,22 +136,45 @@
   return self;
 }
 
-- (STDeferred *)pipe:(STDeferredNextCallback)block
+- (STDeferred *)pipe:(STDeferredNextCallback)successBlock fail:(STDeferredNextCallback)failBlock
 {
   STDeferred *deferred = [STDeferred deferred];
-  
-  [self then:^(id resultObject) {
-    id ret = block(resultObject);
-    if([ret isKindOfClass:[STDeferred class]]) {
-      [(STDeferred*)ret then:^(id newResultObject) {
-        [deferred resolve:newResultObject];
-      }];
-    } else {
-      [deferred resolve:ret];
-    }
-  }];
-  
+  if(successBlock) {
+    [self then:^(id resultObject) {
+      id ret = successBlock(resultObject);
+      if([ret isKindOfClass:[STDeferred class]]) {
+        [[(STDeferred*)ret then:^(id newResultObject) {
+          [deferred resolve:newResultObject];
+        }] fail:^(id newResultObject) {
+          [deferred reject:newResultObject];
+        }];
+      } else {
+        [deferred resolve:ret];
+      }
+    }];
+  }
+  if(failBlock) {
+    [self fail:^(id resultObject) {
+      id ret = failBlock(resultObject);
+      if([ret isKindOfClass:[STDeferred class]]) {
+        [[(STDeferred*)ret then:^(id newResultObject) {
+          [deferred resolve:newResultObject];
+        }] fail:^(id newResultObject) {
+          [deferred reject:newResultObject];
+        }];
+      } else {
+        [deferred reject:ret];
+      }
+    }];
+  }
   return deferred;
+}
+
+- (STDeferred *)pipe:(STDeferredNextCallback)block
+{
+  return [self pipe:block fail:^id(id resultObject) {
+    return resultObject;
+  }];
 }
 
 - (STDeferred *)next:(STDeferredNextCallback)block

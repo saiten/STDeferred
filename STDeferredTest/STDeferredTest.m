@@ -8,18 +8,38 @@
 
 #import "STDeferred.h"
 #import <GHUnitIOS/GHUnit.h>
+#import <NLTHTTPStubServer/NLTHTTPStubServer.h>
  
-@interface STDeferredTest : GHAsyncTestCase { }
+@interface STDeferredTest : GHAsyncTestCase {
+  NLTHTTPStubServer *_server;
+}
 @end
  
 @implementation STDeferredTest
 
+- (void)setUpClass
+{
+  [NLTHTTPStubServer globalSettings].port = 12345;
+  _server = [NLTHTTPStubServer stubServer];
+  [_server startServer];
+}
+
+- (void)tearDownClass
+{
+  [_server stopServer];
+  _server = nil;
+}
+
 - (void) setUp
 {
+  [_server clear];
 }
 
 - (void) tearDown
 {
+  if(![_server isStubEmpty]) {
+    GHFail(@"stub not empty");
+  }
 } 
 
 - (void)testThen
@@ -217,5 +237,61 @@
   
   [self waitForStatus:kGHUnitWaitStatusSuccess timeout:3.0f];
 }
+
+- (STDeferred*)request:(NSURLRequest*)request
+{
+  STDeferred *deferred = [STDeferred deferred];
+  
+  dispatch_queue_t global_queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+  dispatch_async(global_queue, ^{
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request
+                                         returningResponse:&response
+                                                     error:&error];
+    if(error) {
+      [deferred reject:error];
+    } else {
+      [deferred resolve:data];
+    }
+  });
+  
+  return deferred;
+}
+
+- (void)testRequest
+{
+  [[[[_server stub] forPath:@"/req1"] andJSONResponse:[@"request1" dataUsingEncoding:NSUTF8StringEncoding]] andStatusCode:200];
+  [[[[_server stub] forPath:@"/req2"] andJSONResponse:[@"request2" dataUsingEncoding:NSUTF8StringEncoding]] andStatusCode:200];
+  [[[[_server stub] forPath:@"/req3"] andJSONResponse:[@"request3" dataUsingEncoding:NSUTF8StringEncoding]] andStatusCode:200];
+
+  [self prepare];
+  
+  NSURLRequest *req1 = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/req1"]];
+  NSURLRequest *req2 = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/req2"]];
+  NSURLRequest *req3 = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/req3"]];
+
+  STDeferred *deferred1 = [self request:req1];
+  STDeferred *chain = [deferred1 pipe:^id(id resultObject) {
+    NSString *s = [[NSString alloc] initWithData:resultObject encoding:NSUTF8StringEncoding];
+    GHAssertEqualStrings(@"request1", s, @"");
+    return [self request:req2];
+  }];
+  
+  STDeferred *deferred3 = [self request:req3];
+  
+  [[STDeferred when:chain, deferred3, nil] then:^(id resultObject) {
+    GHAssertEquals((NSUInteger)2, [resultObject count], @"");
+    NSString *s1 = [[NSString alloc] initWithData:[resultObject objectAtIndex:0] encoding:NSUTF8StringEncoding];
+    NSString *s2 = [[NSString alloc] initWithData:[resultObject objectAtIndex:1] encoding:NSUTF8StringEncoding];
+    GHAssertEqualStrings(@"request2", s1, @"");
+    GHAssertEqualStrings(@"request3", s2, @"");
+    
+    [self notify:kGHUnitWaitStatusSuccess];
+  }];
+  
+  [self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0f];
+}
+
 
 @end
