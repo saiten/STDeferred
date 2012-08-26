@@ -4,7 +4,7 @@
 
 ## Usage
 	
-	STDeferredBlock block1 = ^STDeferred*{
+	STDeferredBlock block1 = ^{
 		STDeferred *deferred = [STDeferred deferred];
 		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.0f * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
 			[deferred resolve:@"first"];
@@ -12,7 +12,7 @@
 		return deferred;
 	};
 
-	STDeferredBlock block2 = ^STDeferred*{
+	STDeferredBlock block2 = ^{
 		STDeferred *deferred = [STDeferred deferred];
 		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.0f * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
 			[deferred resolve:@"second"];
