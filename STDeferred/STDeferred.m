@@ -56,7 +56,12 @@
       [[argDeferred then:success] fail:failure];
     } else if([argDeferred isKindOfClass:NSClassFromString(@"NSBlock")]) {
       id (^block)() = (id (^)())argDeferred;
-      [[[STDeferred deferred] then:success] resolve:block()];
+      id resultObject = block();
+      if([resultObject isKindOfClass:[STDeferred class]]) {
+        [[(STDeferred*)resultObject then:success] fail:failure];
+      } else {
+        [[[STDeferred deferred] then:success] resolve:block()];
+      }
     } else {
       [[[STDeferred deferred] then:success] resolve:argDeferred];
     }

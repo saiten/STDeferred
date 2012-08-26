@@ -20,7 +20,7 @@
 		return deferred;
 	};
 
-	[[STDeferred when:block1, block2] then:^(id ret) {
+	[[STDeferred when:block1, block2, nil] then:^(id ret) {
 		NSLog(@"%@", [ret objectAtIndex:0]); // "first"
 		NSLog(@"%@", [ret objectAtIndex:1]); // "second"
 	}];

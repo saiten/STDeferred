@@ -187,33 +187,35 @@
   
 }
 
-- (void)hoge
+- (void)testWhenBlock
 {
+  [self prepare];
   
-  
-  // when pattern 2
-  [[STDeferred when:^STDeferred*{
-    __block STDeferred *deferred = [STDeferred deferred];
-    double delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-      NSLog(@"2 sec");
-      [deferred resolve:@"first block"];
+  STDeferredBlock block1 = ^STDeferred*{
+    STDeferred *deferred = [STDeferred deferred];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.0f * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
+      [deferred resolve:@"first"];
     });
     return deferred;
-  }(), ^STDeferred*{
-    __block STDeferred *deferred = [STDeferred deferred];
-    double delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-      NSLog(@"4 sec");
-      [deferred resolve:@"second block"];
+  };
+  
+  STDeferredBlock block2 = ^STDeferred*{
+    STDeferred *deferred = [STDeferred deferred];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.0f * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
+      [deferred resolve:@"second"];
     });
     return deferred;
-  }(), nil] then:^(id resultObject) {
-    NSLog(@"complete");
+  };
+  
+  [[STDeferred when:block1, block2, nil] then:^(id resultObject) {
+    GHAssertEquals((NSUInteger)2, [resultObject count], @"");
+    GHAssertEqualStrings(@"first", [resultObject objectAtIndex:0], @"");
+    GHAssertEqualStrings(@"second", [resultObject objectAtIndex:1], @"");
+    [self notify:kGHUnitWaitStatusSuccess];
   }];
+
   
+  [self waitForStatus:kGHUnitWaitStatusSuccess timeout:3.0f];
 }
 
 @end
