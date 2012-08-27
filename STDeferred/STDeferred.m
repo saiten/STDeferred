@@ -23,6 +23,15 @@
   return self;
 }
 
+- (void)dealloc
+{
+  _myself = nil;
+  _resultObject = nil;
+  _state = nil;
+  _doneList = nil;
+  _failList = nil;
+}
+
 + (id)deferred
 {
   return [[self alloc] init];
