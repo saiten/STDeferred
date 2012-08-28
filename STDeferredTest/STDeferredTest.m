@@ -87,7 +87,7 @@
   GHAssertEquals(3, count, @"failed complete");
 }
 
-- (void)testThenAfterReject
+- (void)testFailAfterReject
 {
   STDeferred *deferred = [STDeferred deferred];
   [deferred reject:@"hoge"];
