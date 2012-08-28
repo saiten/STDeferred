@@ -27,7 +27,6 @@
 {
   _myself = nil;
   _resultObject = nil;
-  _state = nil;
   _doneList = nil;
   _failList = nil;
 }
@@ -130,8 +129,8 @@
 - (STDeferred *)then:(STDeferredCallback)block
 {
   [_doneList addObject:[block copy]];
-  if(_state != STDeferredStateUnresolved) {
-    [self _fire:nil];
+  if(_state == STDeferredStateResolved) {
+    block(_resultObject);
   }
   return self;
 }
@@ -139,8 +138,8 @@
 - (STDeferred *)fail:(STDeferredCallback)block
 {
   [_failList addObject:[block copy]];
-  if(_state != STDeferredStateUnresolved) {
-    [self _fire:nil];
+  if(_state == STDeferredStateRejected) {
+    block(_resultObject);
   }
   return self;
 }
@@ -199,11 +198,13 @@
 
 - (void)_fire:(id)resultObject
 {
+  _resultObject = resultObject;
+  
   NSArray *list = self.isResolved ? _doneList : _failList;
   for(STDeferredCallback block in list) {
     if(block) {
       @try {
-        block(resultObject);
+        block(_resultObject);
       }
       @catch (NSException *exception) {
         _state = STDeferredStateRejected;

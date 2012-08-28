@@ -58,6 +58,18 @@
   GHAssertEquals(3, count, @"complete");
 }
 
+- (void)testThenAfterResolve
+{
+  STDeferred *deferred = [STDeferred deferred];
+  [deferred resolve:@"hoge"];
+  
+  [[deferred then:^(id resultObject) {
+    GHAssertEqualStrings(@"hoge", resultObject, @"");
+  }] fail:^(id resultObject) {
+    GHFail(@"呼ばれないこと");
+  }];
+}
+
 - (void)testFail
 {
   __block int count = 1;
@@ -73,6 +85,18 @@
   }] reject:@"failure"];
   
   GHAssertEquals(3, count, @"failed complete");
+}
+
+- (void)testThenAfterReject
+{
+  STDeferred *deferred = [STDeferred deferred];
+  [deferred reject:@"hoge"];
+  
+  [[deferred then:^(id resultObject) {
+    GHFail(@"呼ばれないこと");    
+  }] fail:^(id resultObject) {
+    GHAssertEqualStrings(@"hoge", resultObject, @"");
+  }];
 }
 
 - (void)testPipe
