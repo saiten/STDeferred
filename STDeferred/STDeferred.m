@@ -8,8 +8,6 @@
 
 #import "STDeferred.h"
 
-static NSInteger count = 0;
-
 @implementation STDeferred
 
 - (id)init
