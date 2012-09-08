@@ -19,7 +19,6 @@
     _doneList = [NSMutableArray array];
     _failList = [NSMutableArray array];
   }
-  NSLog(@"init -> %d", ++count);
   return self;
 }
 
