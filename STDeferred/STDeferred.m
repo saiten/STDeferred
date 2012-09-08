@@ -8,24 +8,25 @@
 
 #import "STDeferred.h"
 
+static NSInteger count = 0;
+
 @implementation STDeferred
 
 - (id)init
 {
   self = [super init];
   if(self) {
-    _myself = self;
     _resultObject = nil;
     _state = STDeferredStateUnresolved;
     _doneList = [NSMutableArray array];
     _failList = [NSMutableArray array];
   }
+  NSLog(@"init -> %d", ++count);
   return self;
 }
 
 - (void)dealloc
 {
-  _myself = nil;
   _resultObject = nil;
   _doneList = nil;
   _failList = nil;
@@ -39,21 +40,24 @@
 + (STDeferred *)whenWithArray:(NSArray*)deferreds
 {
   STDeferred *deferred = [STDeferred deferred];
+  int deferredCount = deferreds.count;
 
-  __block NSMutableDictionary *results = [NSMutableDictionary dictionaryWithCapacity:deferreds.count];
+  __block NSMutableDictionary *results = [NSMutableDictionary dictionaryWithCapacity:deferredCount];
   
-  STDeferredCallback failure = ^(id resultObject) {
+  STDeferredCallback failureCallback = ^(id resultObject) {
     [deferred reject:resultObject];
   };
 
-  for(int i = 0; i < deferreds.count; i++) {
+  for(int i = 0; i < deferredCount; i++) {
     __block int index = i;
     STDeferred *argDeferred = [deferreds objectAtIndex:index];
-    STDeferredCallback success = ^(id resultObject) {
+    
+    STDeferredCallback successCallback = ^(id resultObject) {
       [results setObject:resultObject forKey:[NSNumber numberWithInt:index]];
-      if(results.count == deferreds.count) {
-        NSMutableArray *resultArray = [NSMutableArray arrayWithCapacity:deferreds.count];
-        for(int j = 0; j < deferreds.count ; j++) {
+      
+      if(results.count == deferredCount) {
+        NSMutableArray *resultArray = [NSMutableArray arrayWithCapacity:deferredCount];
+        for(int j = 0; j < deferredCount ; j++) {
           [resultArray addObject:[results objectForKey:[NSNumber numberWithInt:j]]];
         }
         [deferred resolve:resultArray];
@@ -61,17 +65,17 @@
     };
     
     if([argDeferred isKindOfClass:[STDeferred class]]) {
-      [[argDeferred then:success] fail:failure];
+      [[argDeferred then:successCallback] fail:failureCallback];
     } else if([argDeferred isKindOfClass:NSClassFromString(@"NSBlock")]) {
       id (^block)() = (id (^)())argDeferred;
       id resultObject = block();
       if([resultObject isKindOfClass:[STDeferred class]]) {
-        [[(STDeferred*)resultObject then:success] fail:failure];
+        [[(STDeferred*)resultObject then:successCallback] fail:failureCallback];
       } else {
-        [[[STDeferred deferred] then:success] resolve:block()];
+        [[[STDeferred deferred] then:successCallback] resolve:block()];
       }
     } else {
-      [[[STDeferred deferred] then:success] resolve:argDeferred];
+      [[[STDeferred deferred] then:successCallback] resolve:argDeferred];
     }
   }
   
@@ -211,7 +215,6 @@
       }
     }
   }
-  _myself = nil;
 }
 
 @end
