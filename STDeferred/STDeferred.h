@@ -21,7 +21,6 @@ typedef void (^STDeferredCallback)(id resultObject);
 typedef id (^STDeferredNextCallback)(id resultObject);
 
 @interface STDeferred : NSObject {
-  id _myself;
   id _resultObject;
   STDeferredState _state;
   NSMutableArray *_doneList;
