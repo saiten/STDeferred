@@ -50,7 +50,8 @@
     STDeferred *argDeferred = [deferreds objectAtIndex:index];
     
     STDeferredCallback successCallback = ^(id resultObject) {
-      [results setObject:resultObject forKey:[NSNumber numberWithInt:index]];
+      [results setObject:resultObject ? resultObject : [NSNull null]
+                  forKey:[NSNumber numberWithInt:index]];
       
       if(results.count == deferredCount) {
         NSMutableArray *resultArray = [NSMutableArray arrayWithCapacity:deferredCount];

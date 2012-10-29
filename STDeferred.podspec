@@ -9,4 +9,5 @@ Pod::Spec.new do |s|
   s.platform = :ios
   s.source_files = 'STDeferred/**/*.{h,m}'
   s.preserve_paths = 'Podfile', 'Podfile.lock', 'STDeferredTest', 'Frameworks', 'STDeferred.xcodeproj', 'STDeferred.xcworkspace'
+  s.dependency 'JSONKit',
 end

@@ -262,6 +262,19 @@
   [self waitForStatus:kGHUnitWaitStatusSuccess timeout:3.0f];
 }
 
+- (void)testWhenReturnNil
+{
+  STDeferred *d1 = [STDeferred deferred];
+  [d1 resolve:nil];
+  STDeferred *d2 = [STDeferred deferred];
+  [d2 resolve:@"d2"];
+  [[STDeferred when:d1, d2, nil] then:^(id resultObject) {
+    GHAssertEquals((NSUInteger)2, [resultObject count], @"");
+    GHAssertEquals([NSNull null], [resultObject objectAtIndex:0], @"");
+    GHAssertEqualStrings(@"d2", [resultObject objectAtIndex:1], @"");
+  }];
+}
+
 - (STDeferred*)request:(NSURLRequest*)request
 {
   STDeferred *deferred = [STDeferred deferred];
