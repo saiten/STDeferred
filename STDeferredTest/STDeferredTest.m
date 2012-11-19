@@ -99,6 +99,50 @@
   }];
 }
 
+- (void)testAlways
+{
+  [[[[[STDeferred deferred] then:^(id resultObject) {
+    GHAssertEqualStrings(@"success", resultObject, @"");
+  }] fail:^(id resultObject) {
+    GHFail(@"呼ばれないこと");
+  }] always:^(id resultObject) {
+    GHAssertEqualStrings(@"success", resultObject, @"");
+  }] resolve:@"success"];
+
+  [[[[[STDeferred deferred] then:^(id resultObject) {
+    GHFail(@"呼ばれないこと");
+  }] fail:^(id resultObject) {
+    GHAssertEqualStrings(@"failure", resultObject, @"");
+  }] always:^(id resultObject) {
+    GHAssertEqualStrings(@"failure", resultObject, @"");
+  }] reject:@"failure"];
+}
+
+- (void)testAlwaysAfterResolve
+{
+  STDeferred *deferred = [STDeferred deferred];
+  [deferred resolve:@"hoge"];
+    
+  [[[deferred then:^(id resultObject) {
+    GHAssertEqualStrings(@"hoge", resultObject, @"");
+  }] fail:^(id resultObject) {
+    GHFail(@"呼ばれないこと");
+  }] always:^(id resultObject) {
+    GHAssertEqualStrings(@"hoge", resultObject, @"");
+  }];
+    
+  STDeferred *deferred2 = [STDeferred deferred];
+  [deferred2 reject:@"hoge"];
+    
+  [[[deferred2 then:^(id resultObject) {
+    GHFail(@"呼ばれないこと");
+  }] fail:^(id resultObject) {
+    GHAssertEqualStrings(@"hoge", resultObject, @"");
+  }] always:^(id resultObject) {
+    GHAssertEqualStrings(@"hoge", resultObject, @"");
+  }];    
+}
+
 - (void)testPipe
 {
   [self prepare];

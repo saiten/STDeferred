@@ -18,6 +18,7 @@
     _state = STDeferredStateUnresolved;
     _doneList = [NSMutableArray array];
     _failList = [NSMutableArray array];
+    _alwaysList = [NSMutableArray array];
   }
   return self;
 }
@@ -27,6 +28,7 @@
   _resultObject = nil;
   _doneList = nil;
   _failList = nil;
+  _alwaysList = nil;
 }
 
 + (id)deferred
@@ -146,6 +148,16 @@
   return self;
 }
 
+- (STDeferred *)always:(STDeferredCallback)block
+{
+  [_alwaysList addObject:[block copy]];
+  if(_state != STDeferredStateUnresolved) {
+      block(_resultObject);
+  }
+  return self;
+}
+
+
 - (STDeferred *)pipe:(STDeferredNextCallback)successBlock fail:(STDeferredNextCallback)failBlock
 {
   STDeferred *deferred = [STDeferred deferred];
@@ -203,7 +215,7 @@
   _resultObject = resultObject;
   
   NSArray *list = self.isResolved ? _doneList : _failList;
-  for(STDeferredCallback block in list) {
+  for(STDeferredCallback block in [list arrayByAddingObjectsFromArray:_alwaysList]) {
     if(block) {
       @try {
         block(_resultObject);

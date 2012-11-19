@@ -25,12 +25,14 @@ typedef id (^STDeferredNextCallback)(id resultObject);
   STDeferredState _state;
   NSMutableArray *_doneList;
   NSMutableArray *_failList;
+  NSMutableArray *_alwaysList;
 }
 
 + (id)deferred;
 
 - (STDeferred*)then:(STDeferredCallback)block;
 - (STDeferred*)fail:(STDeferredCallback)block;
+- (STDeferred*)always:(STDeferredCallback)block;
 - (STDeferred*)pipe:(STDeferredNextCallback)block;
 - (STDeferred*)pipe:(STDeferredNextCallback)successBlock fail:(STDeferredNextCallback)failBlock;
 + (STDeferred*)whenWithArray:(NSArray*)deferreds;
