@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-  STDeferredStateUnresolved,
-  STDeferredStateResolved,
-  STDeferredStateRejected
+    STDeferredStateUnresolved,
+    STDeferredStateResolved,
+    STDeferredStateRejected
 } STDeferredState;
 
 @class STDeferred;
@@ -21,14 +21,22 @@ typedef void (^STDeferredCallback)(id resultObject);
 typedef id (^STDeferredNextCallback)(id resultObject);
 
 @interface STDeferred : NSObject {
-  id _resultObject;
-  STDeferredState _state;
-  NSMutableArray *_doneList;
-  NSMutableArray *_failList;
-  NSMutableArray *_alwaysList;
+    id _resultObject;
+    STDeferredState _state;
+    NSMutableArray *_doneList;
+    NSMutableArray *_failList;
+    NSMutableArray *_alwaysList;
 }
 
-+ (id)deferred;
++ (instancetype)deferred;
+
+@property (readonly) STDeferred *(^then)(STDeferredCallback block);
+@property (readonly) STDeferred *(^fail)(STDeferredCallback block);
+@property (readonly) STDeferred *(^always)(STDeferredCallback block);
+@property (readonly) STDeferred *(^pipe)(STDeferredNextCallback successBlock, STDeferredNextCallback failBlock);
+@property (readonly) STDeferred *(^next)(STDeferredNextCallback block);
+@property (readonly) STDeferred *(^resolve)(id resultObject);
+@property (readonly) STDeferred *(^reject)(id resultObject);
 
 - (STDeferred*)then:(STDeferredCallback)block;
 - (STDeferred*)fail:(STDeferredCallback)block;
