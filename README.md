@@ -5,6 +5,33 @@
 ## Usage
 
 ```objectivec
+[STDeferred deferred].resolve([NSURLRequest requestWithURL:[NSURL URLWithString:@"http://example.com/data.json"]])
+.next(^id(id request) {
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if(error) {
+        @throw [NSException exceptionWithName:@"Request Error" reason:@"Request Error" userInfo:nil];
+    }
+    return data;
+})
+.next(^id(id responseData) {
+    NSError *error = nil;
+    id json = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&error];
+    if(error) {
+        @throw [NSException exceptionWithName:@"Parse Error" reason:@"Parse Error" userInfo:nil];
+    }
+    return json;
+})
+.then(^(id json) {
+    NSLog(@"name = %@", [json objectForKey:@"name"]);
+})
+.fail(^(id exception) {
+    NSLog(@"error = %@", [exception reason]);
+});
+```
+
+```objectivec
 STDeferredBlock block1 = ^{
   STDeferred *deferred = [STDeferred deferred];
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.0f * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
@@ -26,3 +53,4 @@ STDeferredBlock block2 = ^{
   NSLog(@"%@", [ret objectAtIndex:1]); // "second"
 }];
 ```
+
