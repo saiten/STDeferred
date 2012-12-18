@@ -714,5 +714,41 @@
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:3.0f];
 }
 
+- (void)testNext2
+{
+    [[[[_server stub] forPath:@"/data.json"] andJSONResponse:[@"{\"name\": \"hogehoge\"}" dataUsingEncoding:NSUTF8StringEncoding]] andStatusCode:200];
+    
+    [self prepare];
+    
+    [STDeferred deferred].resolve([NSURLRequest requestWithURL:[NSURL URLWithString:@"http://localhost:12345/data.json"]])
+    .next(^id(id request) {
+        NSURLResponse *response = nil;
+        NSError *error = nil;
+        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        if(error) {
+            @throw [NSException exceptionWithName:@"Request Error" reason:@"Request Error" userInfo:nil];
+        }
+        return data;
+    })
+    .next(^id(id responseData) {
+        NSError *error = nil;
+        id json = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&error];
+        if(error) {
+            @throw [NSException exceptionWithName:@"Parse Error" reason:@"Parse Error" userInfo:nil];
+        }
+        return json;
+    })
+    .then(^(id json) {
+        GHAssertEqualStrings(@"hogehoge", [json objectForKey:@"name"], @"");
+        [self notify:kGHUnitWaitStatusSuccess];
+        NSLog(@"name = %@", [json objectForKey:@"name"]);
+    })
+    .fail(^(id exception) {
+        [self notify:kGHUnitWaitStatusFailure];
+        NSLog(@"error = %@", [exception reason]);
+    });
+    
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:30.0f];
+}
 
 @end

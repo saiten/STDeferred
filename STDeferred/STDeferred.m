@@ -204,7 +204,13 @@
     return [self pipe:^id(id resultObject) {
         STDeferred *deferred = [STDeferred deferred];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [deferred resolve:block(resultObject)];
+            @try {
+                id ret = block(resultObject);
+                [deferred resolve:ret];
+            }
+            @catch (NSException *exception) {
+                [deferred reject:exception];
+            }
         });
         return deferred;
     }];
