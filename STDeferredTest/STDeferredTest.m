@@ -751,4 +751,216 @@
     [self waitForStatus:kGHUnitWaitStatusSuccess timeout:30.0f];
 }
 
+- (void)testRejectAfterResolve
+{
+    STDeferred *deferred = [STDeferred deferred];
+    [deferred resolve:nil];
+    GHAssertTrue(deferred.isResolved, @"resolved");
+    GHAssertFalse(deferred.isRejected, @"not rejected");
+    [deferred reject:nil];
+    GHAssertTrue(deferred.isResolved, @"resolved");
+    GHAssertFalse(deferred.isRejected, @"not rejected");
+}
+
+- (void)testResolveAfterReject
+{
+    STDeferred *deferred = [STDeferred deferred];
+    [deferred reject:nil];
+    GHAssertTrue(deferred.isRejected, @"rejected");
+    GHAssertFalse(deferred.isResolved, @"not resolved");
+    [deferred resolve:nil];
+    GHAssertTrue(deferred.isRejected, @"rejected");
+    GHAssertFalse(deferred.isResolved, @"not resolved");
+}
+
+- (void)testCancel
+{
+    STDeferred *deferred = [STDeferred deferred]
+    .then(^(id ret) {
+        GHFail(@"呼ばれないこと");
+    })
+    .fail(^(NSError *error) {
+        GHAssertEqualStrings(STDeferredErrorDomain, error.domain, @"");
+        GHAssertEquals(STDeferredErrorCancel, error.code, @"");
+    })
+    .canceller(^{
+        GHAssertTrue(YES, @"呼ばれること");
+    });
+    
+    [deferred cancel];
+}
+
+- (void)testCancelAfterResolve
+{
+    STDeferred *deferred = [STDeferred deferred]
+    .then(^(id ret) {
+        GHAssertEqualStrings(@"hoge", ret, @"hoge");
+    })
+    .fail(^(NSError *error) {
+        GHFail(@"呼ばれないこと");
+    })
+    .canceller(^{
+        GHFail(@"呼ばれないこと");
+    });
+
+    [deferred resolve:@"hoge"];    
+    [deferred cancel];
+}
+
+- (void)testCancelAfterReject
+{
+    STDeferred *deferred = [STDeferred deferred]
+    .then(^(id ret) {
+        GHFail(@"呼ばれないこと");
+    })
+    .fail(^(id ret) {
+        GHAssertEqualStrings(@"hoge", ret, @"hoge");
+    })
+    .canceller(^{
+        GHFail(@"呼ばれないこと");
+    });
+    
+    [deferred reject:@"hoge"];
+    [deferred cancel];
+}
+
+- (void)testCancelWhen
+{
+    __block int sequenceCount = 0;
+    
+    STDeferred *d1 = [STDeferred deferred]
+    .fail(^(NSError *error) {
+        GHAssertEqualStrings(STDeferredErrorDomain, error.domain, @"");
+        GHAssertEquals(STDeferredErrorCancel, error.code, @"");
+    })
+    .canceller(^{
+        GHAssertEquals(1, sequenceCount++, @"1");
+    });
+    
+    STDeferred *d2 = [STDeferred deferred]
+    .fail(^(NSError *error) {
+        GHAssertEqualStrings(STDeferredErrorDomain, error.domain, @"");
+        GHAssertEquals(STDeferredErrorCancel, error.code, @"");
+    })
+    .canceller(^{
+        GHAssertEquals(2, sequenceCount++, @"2");
+    });
+    
+    STDeferred *when = [STDeferred when:d1, d2, nil]
+    .then(^(id ret) {
+        GHFail(@"呼ばれない");
+    })
+    .fail(^(NSError *error) {
+        GHAssertEqualStrings(STDeferredErrorDomain, error.domain, @"");
+        GHAssertEquals(STDeferredErrorCancel, error.code, @"");
+        GHAssertEquals(3, sequenceCount++, @"3");
+    });
+
+    GHAssertEquals(0, sequenceCount++, @"0");
+    
+    [when cancel];
+    
+    GHAssertEquals(4, sequenceCount, @"4");
+}
+
+- (void)testCancelPipe
+{
+    __block int sequenceCount = 0;
+
+    STDeferred *d1 = [STDeferred deferred];
+    d1.canceller(^{
+        GHAssertEquals(1, sequenceCount++, @"1");
+    });
+    
+    STDeferred *d2 = d1.pipe(nil, nil);
+    STDeferred *d3 = d2.pipe(nil, nil);
+    d3.fail(^(id ret) {
+        GHAssertEquals(2, sequenceCount++, @"2");
+    });
+    
+    GHAssertEquals(0, sequenceCount++, @"0");
+    [d3 cancel];
+    
+    sequenceCount = 0;
+
+}
+
+- (void)testCancelPipeHalfway
+{
+    __block int sequenceCount = 0;
+    
+    STDeferred *pipeDeferred = [STDeferred deferred].resolve(nil)
+    .pipe(^id(id ret) {
+        STDeferred *d = [STDeferred deferred]
+        .then(^(id ret) {
+            GHFail(@"呼ばれない");
+        })
+        .fail(^(id ret) {
+            GHAssertEquals(2, sequenceCount++, @"2");
+        })
+        .canceller(^() {
+            GHAssertEquals(1, sequenceCount++, @"1");
+        });
+        return d;
+    }, nil)
+    .pipe(^id(id ret) {
+        GHFail(@"呼ばない");
+        return nil;
+    }, nil);
+    
+    GHAssertEquals(0, sequenceCount++, @"0");
+    
+    pipeDeferred
+    .then(^(id ret) {
+        GHFail(@"呼ばれない");
+    })
+    .fail(^(id ret) {
+        GHAssertEquals(3, sequenceCount++, @"3");
+    });
+    
+    [pipeDeferred cancel];
+}
+
+- (void)testCancelPipeLast
+{
+    __block int sequenceCount = 0;
+    
+    STDeferred *pipeDeferred = [STDeferred deferred].resolve(nil)
+    .pipe(^id(id ret) {
+        return [STDeferred deferred].resolve(nil).canceller(^{
+            GHFail(@"呼ばれない");
+        });
+    }, nil)
+    .pipe(^id(id ret) {
+        return [STDeferred deferred].resolve(nil).canceller(^{
+            GHFail(@"呼ばれない");
+        });
+    }, nil)
+    .pipe(^id(id ret) {
+        STDeferred *d = [STDeferred deferred]
+        .then(^(id ret) {
+            GHFail(@"呼ばれない");
+        })
+        .fail(^(id ret) {
+            GHAssertEquals(2, sequenceCount++, @"2");
+        })
+        .canceller(^() {
+            GHAssertEquals(1, sequenceCount++, @"1");
+        });
+        return d;
+    }, nil);
+    
+    GHAssertEquals(0, sequenceCount++, @"0");
+    
+    pipeDeferred
+    .then(^(id ret) {
+        GHFail(@"呼ばれない");
+    })
+    .fail(^(id ret) {
+        GHAssertEquals(3, sequenceCount++, @"3");
+    });
+    
+    [pipeDeferred cancel];    
+}
+
 @end

@@ -19,6 +19,14 @@ typedef enum {
 typedef STDeferred* (^STDeferredBlock)();
 typedef void (^STDeferredCallback)(id resultObject);
 typedef id (^STDeferredNextCallback)(id resultObject);
+typedef void (^STDeferredCancelBlock)();
+
+typedef enum _STDeferredErrorType {
+    STDeferredErrorException,
+    STDeferredErrorCancel
+} STDeferredErrorType;
+
+extern NSString * const STDeferredErrorDomain;
 
 @interface STDeferred : NSObject {
     id _resultObject;
@@ -26,6 +34,7 @@ typedef id (^STDeferredNextCallback)(id resultObject);
     NSMutableArray *_doneList;
     NSMutableArray *_failList;
     NSMutableArray *_alwaysList;
+    STDeferredCancelBlock _canceller;
 }
 
 + (instancetype)deferred;
@@ -37,6 +46,7 @@ typedef id (^STDeferredNextCallback)(id resultObject);
 @property (readonly) STDeferred *(^next)(STDeferredNextCallback block);
 @property (readonly) STDeferred *(^resolve)(id resultObject);
 @property (readonly) STDeferred *(^reject)(id resultObject);
+@property (readonly) STDeferred *(^canceller)(STDeferredCancelBlock block);
 
 - (STDeferred*)then:(STDeferredCallback)block;
 - (STDeferred*)fail:(STDeferredCallback)block;
@@ -47,11 +57,14 @@ typedef id (^STDeferredNextCallback)(id resultObject);
 + (STDeferred*)when:deferred, ... NS_REQUIRES_NIL_TERMINATION;
 + (STDeferred*)timeout:(NSTimeInterval)interval;
 - (STDeferred*)next:(STDeferredNextCallback)block;
+- (STDeferred*)canceller:(STDeferredCancelBlock)block;
 
 - (BOOL)isResolved;
 - (BOOL)isRejected;
 
 - (void)resolve:(id)resultObject;
 - (void)reject:(id)resultObject;
+
+- (void)cancel;
 
 @end

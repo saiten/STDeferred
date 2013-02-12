@@ -8,6 +8,9 @@
 
 #import "STDeferred.h"
 
+
+NSString * const STDeferredErrorDomain = @"STDeferredErrorDomain";
+
 @implementation STDeferred
 
 - (id)init
@@ -19,6 +22,7 @@
         _doneList = [NSMutableArray array];
         _failList = [NSMutableArray array];
         _alwaysList = [NSMutableArray array];
+        _canceller = nil;
     }
     return self;
 }
@@ -29,6 +33,7 @@
     _doneList = nil;
     _failList = nil;
     _alwaysList = nil;
+    _canceller = nil;
 }
 
 + (instancetype)deferred
@@ -36,50 +41,72 @@
     return [[self alloc] init];
 }
 
-+ (STDeferred *)whenWithArray:(NSArray*)deferreds
++ (STDeferred *)whenWithArrayInternal:(NSArray *)deferreds
 {
     STDeferred *deferred = [STDeferred deferred];
-    int deferredCount = deferreds.count;
     
-    __block NSMutableDictionary *results = [NSMutableDictionary dictionaryWithCapacity:deferredCount];
+    int deferredsCount = deferreds.count;
+    __block int resolveCount = 0;
     
-    STDeferredCallback failureCallback = ^(id resultObject) {
-        [deferred reject:resultObject];
-    };
+    NSMutableArray *results = [NSMutableArray arrayWithCapacity:deferredsCount];
     
-    for(int i = 0; i < deferredCount; i++) {
-        __block int index = i;
-        STDeferred *argDeferred = [deferreds objectAtIndex:index];
+    for(int i = 0; i < deferredsCount; i++) {
+        int index = i;
+        [results insertObject:[NSNull null] atIndex:index];
         
-        STDeferredCallback successCallback = ^(id resultObject) {
-            [results setObject:resultObject ? resultObject : [NSNull null]
-                        forKey:[NSNumber numberWithInt:index]];
-            
-            if(results.count == deferredCount) {
-                NSMutableArray *resultArray = [NSMutableArray arrayWithCapacity:deferredCount];
-                for(int j = 0; j < deferredCount ; j++) {
-                    [resultArray addObject:[results objectForKey:[NSNumber numberWithInt:j]]];
-                }
-                [deferred resolve:resultArray];
+        STDeferred *childDeferred = [deferreds objectAtIndex:index];
+        
+        childDeferred
+        .then(^(id resultObject) {
+            if(resultObject) {
+                [results replaceObjectAtIndex:index withObject:resultObject];
             }
-        };
-        
-        if([argDeferred isKindOfClass:[STDeferred class]]) {
-            [[argDeferred then:successCallback] fail:failureCallback];
-        } else if([argDeferred isKindOfClass:NSClassFromString(@"NSBlock")]) {
-            id (^block)() = (id (^)())argDeferred;
+            resolveCount++;
+            if(resolveCount >= deferredsCount) {
+                [deferred resolve:results];
+            }
+        })
+        .fail(^(NSError *resultObject){
+            if(!([resultObject.domain isEqualToString:STDeferredErrorDomain] && resultObject.code == STDeferredErrorCancel)) {
+                [deferred reject:resultObject];
+            }
+        });
+    }
+    
+    deferred.canceller(^{
+        for(STDeferred *deferred in deferreds) {
+            [deferred cancel];
+        }
+    });
+    
+    return deferred;
+}
+
++ (STDeferred *)whenWithArray:(NSArray *)deferreds
+{
+    NSMutableArray *newDeferreds = [NSMutableArray arrayWithCapacity:deferreds.count];
+    
+    for(id obj in deferreds) {
+        if([obj isKindOfClass:[STDeferred class]]) {
+            [newDeferreds addObject:obj];
+        }
+        else if([obj isKindOfClass:NSClassFromString(@"NSBlock")]) {
+            id (^block)() = (id (^)())obj;
             id resultObject = block();
             if([resultObject isKindOfClass:[STDeferred class]]) {
-                [[(STDeferred*)resultObject then:successCallback] fail:failureCallback];
+                [newDeferreds addObject:resultObject];
             } else {
-                [[[STDeferred deferred] then:successCallback] resolve:block()];
+                STDeferred *tmpDeferred = [STDeferred deferred].resolve(resultObject);
+                [newDeferreds addObject:tmpDeferred];
             }
-        } else {
-            [[[STDeferred deferred] then:successCallback] resolve:argDeferred];
+        }
+        else {
+            STDeferred *tmpDeferred = [STDeferred deferred].resolve(obj);
+            [newDeferreds addObject:tmpDeferred];
         }
     }
     
-    return deferred;
+    return [self whenWithArrayInternal:newDeferreds];
 }
 
 + (STDeferred *)when:(id)firstArg, ...
@@ -120,14 +147,18 @@
 
 - (void)resolve:(id)resultObject
 {
-    _state = STDeferredStateResolved;
-    [self _fire:resultObject];
+    if(_state == STDeferredStateUnresolved) {
+        _state = STDeferredStateResolved;
+        [self _fire:resultObject];
+    }
 }
 
 - (void)reject:(id)resultObject
 {
-    _state = STDeferredStateRejected;
-    [self _fire:resultObject];
+    if(_state == STDeferredStateUnresolved) {
+        _state = STDeferredStateRejected;
+        [self _fire:resultObject];
+    }
 }
 
 - (STDeferred *)then:(STDeferredCallback)block
@@ -157,10 +188,14 @@
     return self;
 }
 
-
 - (STDeferred *)pipe:(STDeferredNextCallback)successBlock fail:(STDeferredNextCallback)failBlock
 {
     STDeferred *deferred = [STDeferred deferred];
+
+    deferred.canceller(^{
+        [self cancel];
+    });
+    
     if(successBlock) {
         [self then:^(id resultObject) {
             id ret = successBlock(resultObject);
@@ -170,6 +205,10 @@
                 }] fail:^(id newResultObject) {
                     [deferred reject:newResultObject];
                 }];
+                deferred.canceller(^{
+                    [ret cancel];
+                    [self cancel];
+                });
             } else {
                 [deferred resolve:ret];
             }
@@ -184,11 +223,16 @@
                 }] fail:^(id newResultObject) {
                     [deferred reject:newResultObject];
                 }];
+                deferred.canceller(^{
+                    [ret cancel];
+                    [self cancel];
+                });
             } else {
                 [deferred reject:ret];
             }
         }];
     }
+    
     return deferred;
 }
 
@@ -223,12 +267,7 @@
     NSArray *list = self.isResolved ? _doneList : _failList;
     for(STDeferredCallback block in [list arrayByAddingObjectsFromArray:_alwaysList]) {
         if(block) {
-            @try {
-                block(_resultObject);
-            }
-            @catch (NSException *exception) {
-                _state = STDeferredStateRejected;
-            }
+            block(_resultObject);
         }
     }
 }
@@ -286,6 +325,32 @@
 {
     return ^STDeferred *(STDeferredNextCallback block) {
         return [self next:block];
+    };
+}
+
+- (void)cancel
+{
+    if(_state == STDeferredStateUnresolved) {
+        if(_canceller) {
+            _canceller();
+        }
+        NSError *cancelError = [NSError errorWithDomain:STDeferredErrorDomain
+                                                   code:STDeferredErrorCancel
+                                               userInfo:nil];
+        [self reject:cancelError];
+    }
+}
+
+- (STDeferred *)canceller:(STDeferredCancelBlock)block
+{
+    _canceller = [block copy];
+    return self;
+}
+
+- (STDeferred *(^)(STDeferredCancelBlock))canceller
+{
+    return ^STDeferred *(STDeferredCancelBlock cancelBlock) {
+        return [self canceller:cancelBlock];
     };
 }
 
