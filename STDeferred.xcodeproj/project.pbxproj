@@ -130,6 +130,7 @@
 				7F578B4215E7E8D60053ACA6 /* Frameworks */,
 				7F578B4315E7E8D60053ACA6 /* Resources */,
 				41A32B8735974200A2AA395B /* Copy Pods Resources */,
+				E1B2A2071750C0040005D40F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -191,6 +192,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-STDeferredTest-resources.sh\"\n";
+		};
+		E1B2A2071750C0040005D40F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "sh RunTests.sh";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -270,6 +285,8 @@
 			baseConfigurationReference = 4DDC7C04C36841EC938D31B1 /* Pods-STDeferredTest.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "STDeferredTest/STDeferredTest-Prefix.pch";
 				INFOPLIST_FILE = "STDeferredTest/STDeferredTest-Info.plist";
@@ -284,6 +301,8 @@
 			baseConfigurationReference = 4DDC7C04C36841EC938D31B1 /* Pods-STDeferredTest.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "STDeferredTest/STDeferredTest-Prefix.pch";
 				INFOPLIST_FILE = "STDeferredTest/STDeferredTest-Info.plist";
