@@ -53,4 +53,3 @@ STDeferredBlock block2 = ^{
   NSLog(@"%@", [ret objectAtIndex:1]); // "second"
 }];
 ```
-
