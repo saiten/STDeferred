@@ -37,7 +37,7 @@
 
 - (void) tearDown
 {
-    if(![_server isStubEmpty]) {
+    if(![_server verify]) {
         GHFail(@"stub not empty");
     }
 }
