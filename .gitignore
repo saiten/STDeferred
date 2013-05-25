@@ -2,7 +2,7 @@
 *.xcodeproj/project.xcworkspace
 *.xcodeproj/.DS_Store
 *.xcworkspace/xcuserdata
-
+build/
 Pods/Pods.xcodeproj/xcuserdata
 Pods
 

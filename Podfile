@@ -1,7 +1,6 @@
 platform :ios
 
-target :test do
-   link_with 'STDeferredTest'
+target :STDeferredTest, :exclusive => true do
    pod 'GHUnitIOS'
    pod 'OCMock'
    pod 'NLTHTTPStubServer'

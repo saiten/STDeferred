@@ -7,17 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46A0E1FDAC354F0D9B89462B /* libPods-STDeferredTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FEFB53D799074A83B7286024 /* libPods-STDeferredTest.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		7F578B4815E7E8D60053ACA6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F578B4715E7E8D60053ACA6 /* UIKit.framework */; };
 		7F578B4915E7E8D60053ACA6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F578B0015E7BE770053ACA6 /* Foundation.framework */; };
 		7F578B4B15E7E8D60053ACA6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F578B4A15E7E8D60053ACA6 /* CoreGraphics.framework */; };
 		7F578B5115E7E8D60053ACA6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7F578B4F15E7E8D60053ACA6 /* InfoPlist.strings */; };
 		7F578B5315E7E8D60053ACA6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F578B5215E7E8D60053ACA6 /* main.m */; };
-		7F578B5E15E7E8F30053ACA6 /* libPods-test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F578B5D15E7E8F30053ACA6 /* libPods-test.a */; };
 		7F578B6115E7E9440053ACA6 /* STDeferredTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F578B6015E7E9440053ACA6 /* STDeferredTest.m */; };
 		7F578B6215E7E9760053ACA6 /* STDeferred.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F578B0715E7BE770053ACA6 /* STDeferred.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4DDC7C04C36841EC938D31B1 /* Pods-STDeferredTest.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STDeferredTest.xcconfig"; path = "Pods/Pods-STDeferredTest.xcconfig"; sourceTree = SOURCE_ROOT; };
 		7F578B0015E7BE770053ACA6 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7F578B0415E7BE770053ACA6 /* STDeferred-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "STDeferred-Prefix.pch"; sourceTree = "<group>"; };
 		7F578B0515E7BE770053ACA6 /* STDeferred.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STDeferred.h; sourceTree = "<group>"; };
@@ -31,7 +32,7 @@
 		7F578B5415E7E8D60053ACA6 /* STDeferredTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "STDeferredTest-Prefix.pch"; sourceTree = "<group>"; };
 		7F578B5D15E7E8F30053ACA6 /* libPods-test.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-test.a"; path = "Pods/build/Release-iphoneos/libPods-test.a"; sourceTree = "<group>"; };
 		7F578B6015E7E9440053ACA6 /* STDeferredTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDeferredTest.m; sourceTree = "<group>"; };
-		8E6C446EB5C643D6B9D614F5 /* Pods-test.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test.xcconfig"; path = "Pods/Pods-test.xcconfig"; sourceTree = SOURCE_ROOT; };
+		FEFB53D799074A83B7286024 /* libPods-STDeferredTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-STDeferredTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,10 +40,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F578B5E15E7E8F30053ACA6 /* libPods-test.a in Frameworks */,
 				7F578B4815E7E8D60053ACA6 /* UIKit.framework in Frameworks */,
 				7F578B4915E7E8D60053ACA6 /* Foundation.framework in Frameworks */,
 				7F578B4B15E7E8D60053ACA6 /* CoreGraphics.framework in Frameworks */,
+				46A0E1FDAC354F0D9B89462B /* libPods-STDeferredTest.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,7 +57,7 @@
 				7F578B4C15E7E8D60053ACA6 /* STDeferredTest */,
 				7F578AFF15E7BE770053ACA6 /* Frameworks */,
 				7F578AFE15E7BE770053ACA6 /* Products */,
-				8E6C446EB5C643D6B9D614F5 /* Pods-test.xcconfig */,
+				4DDC7C04C36841EC938D31B1 /* Pods-STDeferredTest.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -75,6 +76,7 @@
 				7F578B0015E7BE770053ACA6 /* Foundation.framework */,
 				7F578B4715E7E8D60053ACA6 /* UIKit.framework */,
 				7F578B4A15E7E8D60053ACA6 /* CoreGraphics.framework */,
+				FEFB53D799074A83B7286024 /* libPods-STDeferredTest.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -127,6 +129,7 @@
 				7F578B4115E7E8D60053ACA6 /* Sources */,
 				7F578B4215E7E8D60053ACA6 /* Frameworks */,
 				7F578B4315E7E8D60053ACA6 /* Resources */,
+				41A32B8735974200A2AA395B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -173,6 +176,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		41A32B8735974200A2AA395B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-STDeferredTest-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7F578B4115E7E8D60053ACA6 /* Sources */ = {
@@ -247,7 +267,7 @@
 		};
 		7F578B5915E7E8D60053ACA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8E6C446EB5C643D6B9D614F5 /* Pods-test.xcconfig */;
+			baseConfigurationReference = 4DDC7C04C36841EC938D31B1 /* Pods-STDeferredTest.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -261,7 +281,7 @@
 		};
 		7F578B5A15E7E8D60053ACA6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8E6C446EB5C643D6B9D614F5 /* Pods-test.xcconfig */;
+			baseConfigurationReference = 4DDC7C04C36841EC938D31B1 /* Pods-STDeferredTest.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
