@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/saiten/STDeferred.png?branch=master)](https://travis-ci.org/saiten/STDeferred)
+
 # STDeferred
 
 簡単なDeferredオブジェクトの実装
