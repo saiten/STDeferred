@@ -192,7 +192,7 @@ NSString * const STDeferredErrorDomain = @"STDeferredErrorDomain";
 {
     STDeferred *deferred = [STDeferred deferred];
 
-    __weak typeof(id) weakSelf = self;
+    __unsafe_unretained typeof(id) weakSelf = self;
     deferred.canceller(^{
         [weakSelf cancel];
     });
