@@ -192,8 +192,9 @@ NSString * const STDeferredErrorDomain = @"STDeferredErrorDomain";
 {
     STDeferred *deferred = [STDeferred deferred];
 
+    __weak typeof(id) weakSelf = self;
     deferred.canceller(^{
-        [self cancel];
+        [weakSelf cancel];
     });
     
     if(successBlock) {
@@ -225,7 +226,7 @@ NSString * const STDeferredErrorDomain = @"STDeferredErrorDomain";
                 }];
                 deferred.canceller(^{
                     [ret cancel];
-                    [self cancel];
+                    [weakSelf cancel];
                 });
             } else {
                 [deferred reject:ret];
