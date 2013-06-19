@@ -197,51 +197,56 @@ NSString * const STDeferredErrorDomain = @"STDeferredErrorDomain";
         [weakSelf cancel];
     });
     
-    if(successBlock) {
-        [self then:^(id resultObject) {
-            id ret = successBlock(resultObject);
-            if([ret isKindOfClass:[STDeferred class]]) {
-                [[(STDeferred*)ret then:^(id newResultObject) {
-                    [deferred resolve:newResultObject];
-                }] fail:^(id newResultObject) {
-                    [deferred reject:newResultObject];
-                }];
-                deferred.canceller(^{
-                    [ret cancel];
-                    [self cancel];
-                });
-            } else {
-                [deferred resolve:ret];
-            }
-        }];
+    if(!successBlock) {
+        successBlock = ^id(id resultObject) {
+            return resultObject;
+        };
     }
-    if(failBlock) {
-        [self fail:^(id resultObject) {
-            id ret = failBlock(resultObject);
-            if([ret isKindOfClass:[STDeferred class]]) {
-                [[(STDeferred*)ret then:^(id newResultObject) {
-                    [deferred resolve:newResultObject];
-                }] fail:^(id newResultObject) {
-                    [deferred reject:newResultObject];
-                }];
-                deferred.canceller(^{
-                    [ret cancel];
-                    [weakSelf cancel];
-                });
-            } else {
-                [deferred reject:ret];
-            }
-        }];
-    }
+    [self then:^(id resultObject) {
+        id ret = successBlock(resultObject);
+        if([ret isKindOfClass:[STDeferred class]]) {
+            [[(STDeferred*)ret then:^(id newResultObject) {
+                [deferred resolve:newResultObject];
+            }] fail:^(id newResultObject) {
+                [deferred reject:newResultObject];
+            }];
+            deferred.canceller(^{
+                [ret cancel];
+                [weakSelf cancel];
+            });
+        } else {
+            [deferred resolve:ret];
+        }
+    }];
     
+    if(!failBlock) {
+        failBlock = ^id(id resultObject) {
+            return resultObject;
+        };
+    }
+    [self fail:^(id resultObject) {
+        id ret = failBlock(resultObject);
+        if([ret isKindOfClass:[STDeferred class]]) {
+            [[(STDeferred*)ret then:^(id newResultObject) {
+                [deferred resolve:newResultObject];
+            }] fail:^(id newResultObject) {
+                [deferred reject:newResultObject];
+            }];
+            deferred.canceller(^{
+                [ret cancel];
+                [weakSelf cancel];
+            });
+        } else {
+            [deferred reject:ret];
+        }
+    }];
+
     return deferred;
 }
 
 - (STDeferred *)pipe:(STDeferredNextCallback)block
 {
-    return [self pipe:block fail:^id(id resultObject) {
-        return resultObject;
-    }];
+    return [self pipe:block fail:nil];
 }
 
 - (STDeferred *)next:(STDeferredNextCallback)block
@@ -313,11 +318,6 @@ NSString * const STDeferredErrorDomain = @"STDeferredErrorDomain";
 - (STDeferred *(^)(STDeferredNextCallback, STDeferredNextCallback))pipe
 {
     return ^STDeferred *(STDeferredNextCallback successBlock, STDeferredNextCallback failBlock) {
-        if(!failBlock) {
-            failBlock = ^id(id resultObject) {
-                return resultObject;
-            };
-        }
         return [self pipe:successBlock fail:failBlock];
     };
 }

@@ -963,4 +963,26 @@
     [pipeDeferred cancel];    
 }
 
+- (void)testPipeBlocksNil
+{
+    [STDeferred deferred].resolve(@"foo")
+    .pipe(nil, nil)
+    .then(^(id ret) {
+        GHAssertEqualStrings(@"foo", ret, @"foo");
+    })
+    .fail(^(id ret) {
+        GHFail(@"呼ばれない");
+    });
+    
+    [STDeferred deferred].reject(@"foo")
+    .pipe(nil, nil)
+    .then(^(id ret) {
+        GHFail(@"呼ばれない");
+    })
+    .fail(^(id ret) {
+        GHAssertEqualStrings(@"foo", ret, @"foo");
+    });
+    
+}
+
 @end
