@@ -14,7 +14,6 @@ Objective-C simple implementation of deferred object
 ### Manual
 
 Add files `STDeferred/STDeferred.h`, `STDeferred/STDeferred.m` to your Project
-setup with cocoapods.
 
 ## Requirements
 
