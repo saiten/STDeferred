@@ -1,8 +1,25 @@
 [![Build Status](https://travis-ci.org/saiten/STDeferred.png?branch=master)](https://travis-ci.org/saiten/STDeferred)
 
-# STDeferred
+# STDeferred 0.1.0
 
-簡単なDeferredオブジェクトの実装
+Objective-C simple implementation of deferred object
+
+## Installation
+
+### Cocoapods
+
+1. Add `pod 'STDeferred'` to your Podfile
+2. Run `pod install`
+
+### Manual
+
+Add files `STDeferred/STDeferred.h`, `STDeferred/STDeferred.m` to your Project
+setup with cocoapods.
+
+## Requirements
+
+- iOS5 and later
+- ARC
 
 ## Usage
 
