@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/saiten/STDeferred.png?branch=master)](https://travis-ci.org/saiten/STDeferred)
-
-# STDeferred 0.1.0
+# STDeferred 0.1.0 [![Build Status](https://travis-ci.org/saiten/STDeferred.png?branch=master)](https://travis-ci.org/saiten/STDeferred)
 
 Objective-C simple implementation of deferred object
 
