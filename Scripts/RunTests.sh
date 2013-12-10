@@ -37,10 +37,11 @@ if [ ! -e "$TEST_TARGET_EXECUTABLE_PATH" ]; then
 fi
 
 # If trapping fails, make sure we kill any running securityd
-launchctl list | grep GHUNIT_RunIPhoneSecurityd && launchctl remove GHUNIT_RunIPhoneSecurityd
-SCRIPTS_PATH=`cd $(dirname $0); pwd`
-launchctl submit -l GHUNIT_RunIPhoneSecurityd -- "$SCRIPTS_PATH"/RunIPhoneSecurityd.sh $IPHONE_SIMULATOR_ROOT $CFFIXED_USER_HOME
-trap "launchctl remove GHUNIT_RunIPhoneSecurityd" EXIT TERM INT
+# TODO: Can we remove that code? Why is it used?
+#launchctl list | grep GHUNIT_RunIPhoneSecurityd && launchctl remove GHUNIT_RunIPhoneSecurityd
+#SCRIPTS_PATH=`cd $(dirname $0); pwd`
+#launchctl submit -l GHUNIT_RunIPhoneSecurityd -- "$SCRIPTS_PATH"/RunIPhoneSecurityd.sh $IPHONE_SIMULATOR_ROOT $CFFIXED_USER_HOME
+#trap "launchctl remove GHUNIT_RunIPhoneSecurityd" EXIT TERM INT
 
 RUN_CMD="\"$TEST_TARGET_EXECUTABLE_PATH\" -RegisterForSystemEvents"
 
@@ -59,7 +60,7 @@ if [ -n "$WRITE_JUNIT_XML" ]; then
   RESULTS_DIR="${MY_TMPDIR}test-results"
 
   if [ -d "$RESULTS_DIR" ]; then
-	`$CP -r "$RESULTS_DIR" "$BUILD_DIR" && rm -r "$RESULTS_DIR"`
+        `$CP -r "$RESULTS_DIR" "$BUILD_DIR" && rm -r "$RESULTS_DIR"`
   fi
 fi
 
