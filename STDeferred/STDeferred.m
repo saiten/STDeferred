@@ -8,7 +8,6 @@
 
 #import "STDeferred.h"
 
-
 NSString * const STDeferredErrorDomain = @"STDeferredErrorDomain";
 
 @implementation STDeferred
@@ -73,8 +72,9 @@ NSString * const STDeferredErrorDomain = @"STDeferredErrorDomain";
         });
     }
     
+    __weak NSArray *weakDeferreds = deferreds;
     deferred.canceller(^{
-        for(STDeferred *deferred in deferreds) {
+        for(STDeferred *deferred in weakDeferreds) {
             [deferred cancel];
         }
     });
@@ -192,7 +192,7 @@ NSString * const STDeferredErrorDomain = @"STDeferredErrorDomain";
 {
     STDeferred *deferred = [STDeferred deferred];
 
-    __unsafe_unretained typeof(id) weakSelf = self;
+    __weak typeof(id) weakSelf = self;
     deferred.canceller(^{
         [weakSelf cancel];
     });
@@ -205,13 +205,14 @@ NSString * const STDeferredErrorDomain = @"STDeferredErrorDomain";
     [self then:^(id resultObject) {
         id ret = successBlock(resultObject);
         if([ret isKindOfClass:[STDeferred class]]) {
-            [[(STDeferred*)ret then:^(id newResultObject) {
+            __weak STDeferred *resultDeferred = ret;
+            [[resultDeferred then:^(id newResultObject) {
                 [deferred resolve:newResultObject];
             }] fail:^(id newResultObject) {
                 [deferred reject:newResultObject];
             }];
             deferred.canceller(^{
-                [ret cancel];
+                [resultDeferred cancel];
                 [weakSelf cancel];
             });
         } else {
@@ -227,13 +228,14 @@ NSString * const STDeferredErrorDomain = @"STDeferredErrorDomain";
     [self fail:^(id resultObject) {
         id ret = failBlock(resultObject);
         if([ret isKindOfClass:[STDeferred class]]) {
-            [[(STDeferred*)ret then:^(id newResultObject) {
+            __weak STDeferred *resultDeferred = ret;
+            [[resultDeferred then:^(id newResultObject) {
                 [deferred resolve:newResultObject];
             }] fail:^(id newResultObject) {
                 [deferred reject:newResultObject];
             }];
             deferred.canceller(^{
-                [ret cancel];
+                [resultDeferred cancel];
                 [weakSelf cancel];
             });
         } else {
