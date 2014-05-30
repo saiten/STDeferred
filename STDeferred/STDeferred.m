@@ -72,11 +72,15 @@ NSString * const STDeferredErrorDomain = @"STDeferredErrorDomain";
         });
     }
     
-    __weak NSArray *weakDeferreds = deferreds;
+    __block NSArray *blockDeferreds = deferreds;
     deferred.canceller(^{
-        for(STDeferred *deferred in weakDeferreds) {
+        for(STDeferred *deferred in blockDeferreds) {
             [deferred cancel];
         }
+    });
+    
+    deferred.always(^(id obj){
+        blockDeferreds = nil;
     });
     
     return deferred;

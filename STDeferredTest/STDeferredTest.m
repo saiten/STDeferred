@@ -963,6 +963,83 @@
     [pipeDeferred cancel];    
 }
 
+- (void)testCancelInPipe
+{
+    [self prepare];
+    
+    __block int sequenceCount = 0;
+    
+    STDeferred *deferred = [STDeferred deferred];
+    
+    STDeferred *d1 = [STDeferred deferred]
+    .resolve(nil)
+    .pipe(^id(id ret) {
+        GHAssertEquals(0, sequenceCount++, @"0");
+        return [STDeferred deferred].resolve(nil).canceller(^{
+            GHFail(@"呼ばれない");
+        });
+    }, nil)
+    .pipe(^id(id ret) {
+        GHAssertEquals(1, sequenceCount++, @"1");
+        STDeferred *pipeDeferred = [STDeferred deferred];
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^{
+            GHAssertEquals(5, sequenceCount++, @"5");
+            [pipeDeferred resolve:nil];
+        });
+        
+        pipeDeferred.canceller(^{
+            GHAssertEquals(4, sequenceCount++, @"4");
+        });
+        return pipeDeferred;
+    }, nil)
+    .pipe(^id(id ret) {
+        GHFail(@"呼ばれない");
+        return [STDeferred deferred].resolve(nil).canceller(^{
+            GHFail(@"呼ばれない");
+        });
+    }, nil)
+    .pipe(^id(id ret) {
+        GHFail(@"呼ばれない");
+        return [STDeferred deferred].resolve(nil).canceller(^{
+            GHFail(@"呼ばれない");
+        });
+    }, nil);
+    
+    STDeferred *d2 = [STDeferred deferred].resolve(nil);
+    d2.canceller(^{
+        GHFail(@"呼ばれない");
+    });
+    d2.then(^(id ret) {
+        GHAssertTrue(YES, @"呼ばれること");
+    });
+    
+    // すべてのセットアップが完了するまでresolveしない
+    STDeferred *setups = [STDeferred when:d1, d2, nil]
+    .then(^(id ret) {
+        GHFail(@"呼ばれない");
+        [deferred resolve:nil];
+    })
+    .fail(^(NSError *error) {
+        GHAssertTrue(YES, @"呼ばれること");
+        [deferred reject:error];
+        [self notify:kGHUnitWaitStatusSuccess];
+    });
+    
+    deferred.canceller(^{
+        GHAssertEquals(3, sequenceCount++, @"3");
+        [setups cancel];
+    });
+    
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.f * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^{
+        GHAssertEquals(2, sequenceCount++, @"2");
+        [deferred cancel];
+    });
+    
+    [self waitForStatus:kGHUnitWaitStatusSuccess timeout:5.0f];
+}
+
 - (void)testPipeBlocksNil
 {
     [STDeferred deferred].resolve(@"foo")
