@@ -5,9 +5,8 @@
 //  Copyright © 2015 saiten. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+double STDeferredVersionNumber;
 
-FOUNDATION_EXPORT double STDeferredVersionNumber;
-FOUNDATION_EXPORT const unsigned char STDeferredVersionString[];
+const unsigned char STDeferredVersionString[];
 
 
