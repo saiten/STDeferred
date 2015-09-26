@@ -10,6 +10,14 @@
 		7F827EDC1B747AA10000D082 /* STDeferred.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F827EDB1B747AA10000D082 /* STDeferred.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F827EE31B747AA10000D082 /* STDeferred.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F827ED81B747AA10000D082 /* STDeferred.framework */; };
 		7F827EE81B747AA10000D082 /* STDeferredTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F827EE71B747AA10000D082 /* STDeferredTests.swift */; };
+		7F8682671BB6990F00552843 /* STDeferred.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAD81771B7B07A1002969CA /* STDeferred.swift */; };
+		7F86826B1BB6990F00552843 /* STDeferred.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F827EDB1B747AA10000D082 /* STDeferred.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7F8682761BB6991A00552843 /* STDeferredTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F827EE71B747AA10000D082 /* STDeferredTests.swift */; };
+		7F8682781BB6991A00552843 /* STDeferred.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F827ED81B747AA10000D082 /* STDeferred.framework */; };
+		7F8682791BB6991A00552843 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAD81D71B7B27DD002969CA /* Result.framework */; };
+		7F86827C1BB6991A00552843 /* STDeferred.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7F827ED81B747AA10000D082 /* STDeferred.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7F8682861BB69D8A00552843 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F8682851BB69D8A00552843 /* Result.framework */; };
+		7F8682871BB69DC000552843 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F8682851BB69D8A00552843 /* Result.framework */; };
 		7FAD81781B7B07A1002969CA /* STDeferred.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAD81771B7B07A1002969CA /* STDeferred.swift */; };
 		7FAD817C1B7B09D0002969CA /* STDeferred.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7F827ED81B747AA10000D082 /* STDeferred.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7FAD818C1B7B2470002969CA /* STDeferred.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAD81821B7B2470002969CA /* STDeferred.framework */; };
@@ -32,6 +40,13 @@
 			remoteGlobalIDString = 7F827ED71B747AA10000D082;
 			remoteInfo = STDeferred;
 		};
+		7F8682831BB6993600552843 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7F827ECF1B747AA00000D082 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7F8682651BB6990F00552843;
+			remoteInfo = "STDeferred-TV";
+		};
 		7FAD818D1B7B2470002969CA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7F827ECF1B747AA00000D082 /* Project object */;
@@ -42,6 +57,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		7F86827B1BB6991A00552843 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7F86827C1BB6991A00552843 /* STDeferred.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7FAD817A1B7B09B2002969CA /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -73,6 +98,9 @@
 		7F827EE21B747AA10000D082 /* STDeferredTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STDeferredTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F827EE71B747AA10000D082 /* STDeferredTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STDeferredTests.swift; sourceTree = "<group>"; };
 		7F827EE91B747AA10000D082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7F8682701BB6990F00552843 /* STDeferred.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = STDeferred.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F8682811BB6991A00552843 /* STDeferred-TVTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "STDeferred-TVTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F8682851BB69D8A00552843 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = ../Carthage/Build/tvOS/Result.framework; sourceTree = "<group>"; };
 		7FAD81771B7B07A1002969CA /* STDeferred.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STDeferred.swift; sourceTree = "<group>"; };
 		7FAD81821B7B2470002969CA /* STDeferred.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = STDeferred.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FAD818B1B7B2470002969CA /* STDeferredTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STDeferredTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +123,24 @@
 			files = (
 				7F827EE31B747AA10000D082 /* STDeferred.framework in Frameworks */,
 				7FAD81DB1B7B27F8002969CA /* Result.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F8682681BB6990F00552843 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F8682861BB69D8A00552843 /* Result.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F8682771BB6991A00552843 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F8682871BB69DC000552843 /* Result.framework in Frameworks */,
+				7F8682781BB6991A00552843 /* STDeferred.framework in Frameworks */,
+				7F8682791BB6991A00552843 /* Result.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +180,8 @@
 				7F827EE21B747AA10000D082 /* STDeferredTests.xctest */,
 				7FAD81821B7B2470002969CA /* STDeferred.framework */,
 				7FAD818B1B7B2470002969CA /* STDeferredTests.xctest */,
+				7F8682701BB6990F00552843 /* STDeferred.framework */,
+				7F8682811BB6991A00552843 /* STDeferred-TVTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -160,6 +208,7 @@
 		7FAD81741B7B071B002969CA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7F8682851BB69D8A00552843 /* Result.framework */,
 				7FAD81D91B7B27E9002969CA /* Result.framework */,
 				7FAD81D71B7B27DD002969CA /* Result.framework */,
 				7F827EDD1B747AA10000D082 /* Info.plist */,
@@ -175,6 +224,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F827EDC1B747AA10000D082 /* STDeferred.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F86826A1BB6990F00552843 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F86826B1BB6990F00552843 /* STDeferred.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +280,43 @@
 			name = "STDeferred-iOSTests";
 			productName = STDeferredTests;
 			productReference = 7F827EE21B747AA10000D082 /* STDeferredTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7F8682651BB6990F00552843 /* STDeferred-TV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F86826D1BB6990F00552843 /* Build configuration list for PBXNativeTarget "STDeferred-TV" */;
+			buildPhases = (
+				7F8682661BB6990F00552843 /* Sources */,
+				7F8682681BB6990F00552843 /* Frameworks */,
+				7F86826A1BB6990F00552843 /* Headers */,
+				7F86826C1BB6990F00552843 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "STDeferred-TV";
+			productName = STDeferred;
+			productReference = 7F8682701BB6990F00552843 /* STDeferred.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		7F8682721BB6991A00552843 /* STDeferred-TVTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F86827E1BB6991A00552843 /* Build configuration list for PBXNativeTarget "STDeferred-TVTests" */;
+			buildPhases = (
+				7F8682751BB6991A00552843 /* Sources */,
+				7F8682771BB6991A00552843 /* Frameworks */,
+				7F86827A1BB6991A00552843 /* Resources */,
+				7F86827B1BB6991A00552843 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7F8682841BB6993600552843 /* PBXTargetDependency */,
+			);
+			name = "STDeferred-TVTests";
+			productName = STDeferredTests;
+			productReference = 7F8682811BB6991A00552843 /* STDeferred-TVTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		7FAD81811B7B2470002969CA /* STDeferred-Mac */ = {
@@ -302,6 +396,8 @@
 				7F827EE11B747AA10000D082 /* STDeferred-iOSTests */,
 				7FAD81811B7B2470002969CA /* STDeferred-Mac */,
 				7FAD818A1B7B2470002969CA /* STDeferred-MacTests */,
+				7F8682651BB6990F00552843 /* STDeferred-TV */,
+				7F8682721BB6991A00552843 /* STDeferred-TVTests */,
 			);
 		};
 /* End PBXProject section */
@@ -315,6 +411,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		7F827EE01B747AA10000D082 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F86826C1BB6990F00552843 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F86827A1BB6991A00552843 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -354,6 +464,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7F8682661BB6990F00552843 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F8682671BB6990F00552843 /* STDeferred.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F8682751BB6991A00552843 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F8682761BB6991A00552843 /* STDeferredTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7FAD817D1B7B2470002969CA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -377,6 +503,11 @@
 			isa = PBXTargetDependency;
 			target = 7F827ED71B747AA10000D082 /* STDeferred-iOS */;
 			targetProxy = 7F827EE41B747AA10000D082 /* PBXContainerItemProxy */;
+		};
+		7F8682841BB6993600552843 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7F8682651BB6990F00552843 /* STDeferred-TV */;
+			targetProxy = 7F8682831BB6993600552843 /* PBXContainerItemProxy */;
 		};
 		7FAD818E1B7B2470002969CA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -491,7 +622,7 @@
 					"$(PROJECT_DIR)/Carthage/Checkouts/Result/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/Carthage/Checkouts/Result/build/Debug",
 				);
-				INFOPLIST_FILE = STDeferred/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/STDeferred/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -518,7 +649,7 @@
 					"$(PROJECT_DIR)/Carthage/Checkouts/Result/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/Carthage/Checkouts/Result/build/Debug",
 				);
-				INFOPLIST_FILE = STDeferred/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/STDeferred/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -553,6 +684,89 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.saiten.STDeferredTests;
 				PRODUCT_NAME = "$(PROJECT_NAME)Tests";
+			};
+			name = Release;
+		};
+		7F86826E1BB6990F00552843 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Checkouts/Result/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Carthage/Checkouts/Result/build/Debug",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/STDeferred/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.saiten.STDeferred;
+				PRODUCT_NAME = STDeferred;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7F86826F1BB6990F00552843 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Checkouts/Result/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Carthage/Checkouts/Result/build/Debug",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/STDeferred/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.saiten.STDeferred;
+				PRODUCT_NAME = STDeferred;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		7F86827F1BB6991A00552843 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = STDeferredTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.saiten.STDeferredTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+			};
+			name = Debug;
+		};
+		7F8682801BB6991A00552843 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = STDeferredTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.saiten.STDeferredTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
 			};
 			name = Release;
 		};
@@ -666,6 +880,24 @@
 			buildConfigurations = (
 				7F827EF01B747AA10000D082 /* Debug */,
 				7F827EF11B747AA10000D082 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F86826D1BB6990F00552843 /* Build configuration list for PBXNativeTarget "STDeferred-TV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F86826E1BB6990F00552843 /* Debug */,
+				7F86826F1BB6990F00552843 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F86827E1BB6991A00552843 /* Build configuration list for PBXNativeTarget "STDeferred-TVTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F86827F1BB6991A00552843 /* Debug */,
+				7F8682801BB6991A00552843 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
