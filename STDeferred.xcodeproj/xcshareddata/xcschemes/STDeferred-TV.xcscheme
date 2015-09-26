@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F8682651BB6990F00552843"
-               BuildableName = "STDeferred.framework"
+               BlueprintIdentifier = "7F86828C1BB6A83D00552843"
+               BuildableName = "STDeferred-TV.framework"
                BlueprintName = "STDeferred-TV"
                ReferencedContainer = "container:STDeferred.xcodeproj">
             </BuildableReference>
@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7F8682951BB6A83D00552843"
+               BuildableName = "STDeferred-TVTests.xctest"
+               BlueprintName = "STDeferred-TVTests"
+               ReferencedContainer = "container:STDeferred.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "7F86828C1BB6A83D00552843"
+            BuildableName = "STDeferred-TV.framework"
+            BlueprintName = "STDeferred-TV"
+            ReferencedContainer = "container:STDeferred.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -45,8 +64,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7F8682651BB6990F00552843"
-            BuildableName = "STDeferred.framework"
+            BlueprintIdentifier = "7F86828C1BB6A83D00552843"
+            BuildableName = "STDeferred-TV.framework"
             BlueprintName = "STDeferred-TV"
             ReferencedContainer = "container:STDeferred.xcodeproj">
          </BuildableReference>
@@ -63,8 +82,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7F8682651BB6990F00552843"
-            BuildableName = "STDeferred.framework"
+            BlueprintIdentifier = "7F86828C1BB6A83D00552843"
+            BuildableName = "STDeferred-TV.framework"
             BlueprintName = "STDeferred-TV"
             ReferencedContainer = "container:STDeferred.xcodeproj">
          </BuildableReference>
