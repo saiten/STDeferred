@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7F8682651BB6990F00552843"
-               BuildableName = "STDeferred-TV.framework"
+               BuildableName = "STDeferred.framework"
                BlueprintName = "STDeferred-TV"
                ReferencedContainer = "container:STDeferred.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7F8682651BB6990F00552843"
-            BuildableName = "STDeferred-TV.framework"
+            BuildableName = "STDeferred.framework"
             BlueprintName = "STDeferred-TV"
             ReferencedContainer = "container:STDeferred.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7F8682651BB6990F00552843"
-            BuildableName = "STDeferred-TV.framework"
+            BuildableName = "STDeferred.framework"
             BlueprintName = "STDeferred-TV"
             ReferencedContainer = "container:STDeferred.xcodeproj">
          </BuildableReference>

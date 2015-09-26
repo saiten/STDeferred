@@ -699,9 +699,8 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Checkouts/Result/build/Debug-iphoneos",
-					"$(PROJECT_DIR)/Carthage/Checkouts/Result/build/Debug",
 					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+					"$(PROJECT_DIR)/Carthage/Checkouts/Result/build/Debug",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/STDeferred/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -726,9 +725,8 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Checkouts/Result/build/Debug-iphoneos",
-					"$(PROJECT_DIR)/Carthage/Checkouts/Result/build/Debug",
 					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+					"$(PROJECT_DIR)/Carthage/Checkouts/Result/build/Debug",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/STDeferred/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
