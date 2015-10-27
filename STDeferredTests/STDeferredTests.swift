@@ -646,5 +646,39 @@ class STDeferredTest: XCTestCase {
 
         self.waitForExpectationsWithTimeout(5.0) { _ in }
     }
+    
+    func testSync() {
+        let d1 = Deferred<String, TestError>()
+
+        Deferred<String, TestError>().sync(d1)
+        .success { (value) in
+            XCTAssertEqual("success", value)
+        }
+        .failure { (error) in
+            XCTFail()
+        }
+        d1.resolve("success")
+        
+        let d2 = Deferred<String, TestError>()
+        Deferred<String, TestError>().sync(d1)
+        .success { (value) in
+            XCTFail()
+        }
+        .failure { (error) in
+            XCTAssertEqual("fail", error!.rawValue)
+        }
+        d2.reject(.Fail)
+        
+        let d3 = Deferred<String, TestError>()
+        Deferred<String, TestError>().sync(d1)
+        .success { (value) in
+            XCTFail()
+        }
+        .failure { (error) in
+            XCTAssertNil(error)
+        }
+        d3.cancel()
+    }
+    
 }
 
