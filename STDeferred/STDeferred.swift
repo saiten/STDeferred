@@ -251,7 +251,7 @@ public class Deferred<T, E: ErrorType> {
         
         self.complete { result in
             let resultDeferred = handler(result)
-            
+
             resultDeferred.complete { result in
                 if let result = result {
                     switch result {
@@ -268,6 +268,23 @@ public class Deferred<T, E: ErrorType> {
         }
         
         return deferred
+    }
+    
+    public func sync(deferred: Deferred<T, E>) -> Self {
+        deferred.complete { (result) in
+            guard let result = result else {
+                self.cancel()
+                return
+            }
+            
+            switch result {
+            case .Success(let value):
+                deferred.resolve(value)
+            case .Failure(let error):
+                deferred.reject(error)
+            }
+        }
+        return self
     }
 }
 
