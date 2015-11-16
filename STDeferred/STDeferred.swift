@@ -279,9 +279,9 @@ public class Deferred<T, E: ErrorType> {
             
             switch result {
             case .Success(let value):
-                deferred.resolve(value)
+                self.resolve(value)
             case .Failure(let error):
-                deferred.reject(error)
+                self.reject(error)
             }
         }
         return self

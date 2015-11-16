@@ -660,7 +660,7 @@ class STDeferredTest: XCTestCase {
         d1.resolve("success")
         
         let d2 = Deferred<String, TestError>()
-        Deferred<String, TestError>().sync(d1)
+        Deferred<String, TestError>().sync(d2)
         .success { (value) in
             XCTFail()
         }
@@ -670,7 +670,7 @@ class STDeferredTest: XCTestCase {
         d2.reject(.Fail)
         
         let d3 = Deferred<String, TestError>()
-        Deferred<String, TestError>().sync(d1)
+        Deferred<String, TestError>().sync(d3)
         .success { (value) in
             XCTFail()
         }
