@@ -4,7 +4,7 @@ Objective-C simple implementation of deferred object
 
 ## Installation
 
-### Cocoapods
+### CocoaPods
 
 1. Add `pod 'STDeferred'` to your Podfile
 2. Run `pod install`
